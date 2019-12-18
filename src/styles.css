@@ -1,0 +1,8 @@
+.react-images-slider-container {
+    display: flex;
+    transition-property: transform;
+}
+
+.react-images-slider-img {
+    width: 100%;
+}
