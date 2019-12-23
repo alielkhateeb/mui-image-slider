@@ -1,6 +1,6 @@
 import React from 'react';
 import {render} from 'react-dom';
-import ReactImagesSlider from '../src';
+import MuiImageSlider from '../dist';
 
 const App = () => {
     const images = [
@@ -9,7 +9,8 @@ const App = () => {
         'https://homepages.cae.wisc.edu/~ece533/images/baboon.png',
         'https://homepages.cae.wisc.edu/~ece533/images/barbara.png',
     ];
-    return <ReactImagesSlider images={images}/>;
+
+    return <MuiImageSlider images={images}/>;
 
 };
 render(<App/>, document.getElementById("root"));

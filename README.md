@@ -1,2 +1,60 @@
-# react-images-slider
-This is a simple customizable images slider for React Apps.
+
+# MUI-Image-Slider - Image Slider for Material UI
+
+MUI-Image-Slider is an image slider component built on [Material-UI](https://www.material-ui.com).
+
+## Install
+
+`npm install mui-image-slider --save`
+
+## Usage
+
+```js
+import MuiImageSlider from 'mui-image-slider';
+
+const images = [
+    'https://homepages.cae.wisc.edu/~ece533/images/airplane.png',
+    'https://homepages.cae.wisc.edu/~ece533/images/arctichare.png',
+    'https://homepages.cae.wisc.edu/~ece533/images/baboon.png',
+    'https://homepages.cae.wisc.edu/~ece533/images/barbara.png',
+];
+
+<MuiImageSlider images={images}/>
+```
+## API
+
+|Name|Type|Default|Description
+|:--:|:-----|:-----|:-----|
+|**`images`**|Array||List of images' url string.
+|**`classes`**|Object||Override or extend the styles applied to the component. See [CSS API](#classes-object) below for more details.
+|**`customArrow`**|Function||Render a custom arrow component.
+|**`onArrowClick`**|Function||Callback to an arrow click. `function(currentImage: Number) {console.log(currentImage}` where `currentImage` is the index of the currently visible image.
+|**`arrows`**|Boolean|`true`|Show/Hide navigation arrows.
+|**`autoPlay`**|Boolean|`false`|Autoplay the images like a slideshow.
+|**`arrowsColor`**|String|`dimgrey`|Color of the arrows.
+|**`arrowsBgColor`**|String|`transparent`|Colors of the arrows wrapper (Background).
+|**`arrowsBgHoverColor`**|String|`#B9B9B95E`|Colors of the wrapper on hover.
+|**`alwaysShowArrows`**|Boolean|false|Arrows will always be visible.
+|**`fitToImageHeight`**|Boolean|false|Component height is adaptive to the current image's height.
+
+## Classes Object
+
+|Rule Name|Description
+|:--:|:-----|
+|**`root`**|Styles applied to the `root` element.
+|**`wrapper`**|Styles applied to the `wrapper` element.
+|**`arrowWrapper`**|Styles applied to the `arrowWrapper` element.
+
+## Contributing
+Thanks for taking an interest in the library and the github community!
+
+The following commands should get you started:
+
+```sh
+npm install
+npm start
+```
+open http://localhost:3001/ in browser
+
+## License
+The files included in this repository are licensed under the MIT license.

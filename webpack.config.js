@@ -4,18 +4,20 @@ const htmlWebpackPlugin = new HtmlWebpackPlugin({
     template: path.join(__dirname, "example/index.html"),
     filename: "./index.html",
 });
+
 module.exports = {
-    entry: path.join(__dirname, "example/index.js"),
+    entry: path.join(__dirname, 'example/index.js'),
     module: {
         rules: [
             {
                 test: /\.(js|jsx)$/,
-                use: "babel-loader",
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        presets: ["@babel/preset-env", "@babel/preset-react"]
+                    }
+                },
                 exclude: /node_modules/,
-            },
-            {
-                test: /\.css$/,
-                use: ["style-loader", "css-loader"],
             },
         ],
     },
