@@ -1,6 +1,6 @@
 {
   "name": "mui-image-slider",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Image Slider for React using Material-UI",
   "main": "dist/index.js",
   "scripts": {
