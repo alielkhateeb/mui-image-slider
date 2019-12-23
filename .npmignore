@@ -3,3 +3,5 @@ example
 .babelrc
 .gitignore
 webpack.config.js
+rollup.config.js
+.idea

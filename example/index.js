@@ -1,6 +1,6 @@
 import React from 'react';
 import {render} from 'react-dom';
-import MuiImageSlider from '../dist';
+import MuiImageSlider from '../src';
 
 const App = () => {
     const images = [
@@ -10,7 +10,7 @@ const App = () => {
         'https://homepages.cae.wisc.edu/~ece533/images/barbara.png',
     ];
 
-    return <MuiImageSlider images={images}/>;
+    return <MuiImageSlider images={images} autoPlay/>;
 
 };
 render(<App/>, document.getElementById("root"));

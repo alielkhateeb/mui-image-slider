@@ -1,7 +1,7 @@
 {
   "name": "mui-image-slider",
   "version": "1.0.0",
-  "description": "This is a simple customizable images slider for React Apps.",
+  "description": "Image Slider for React using Material-UI",
   "main": "dist/index.js",
   "scripts": {
     "start": "webpack-dev-server --open --mode development",

@@ -74,7 +74,7 @@ const useStyles = makeStyles({
 });
 
 const MuiImageSlider = props => {
-    const {images, customArrow, onArrowClick} = props;
+    const {images, customArrow, onArrowClick, autoPlay} = props;
 
     let defaultOptions = {
         arrows: true,
@@ -91,12 +91,14 @@ const MuiImageSlider = props => {
 
     const [currentImage, setCurrentImage] = useState(0);
     const [direction, setDirection] = useState('left');
+    const [autoPlayTimeout, setAutoPlayTimeout] = useState();
 
     const getNextImage = () => (currentImage + 1) % images.length;
     const getPrevImage = () => (currentImage ? currentImage : images.length) - 1;
 
     const handleNextImageClick = () => {
         setDirection('left');
+        restartAutoPlay();
         let nextImage = getNextImage();
         setCurrentImage(nextImage);
         if (onArrowClick) {
@@ -106,12 +108,27 @@ const MuiImageSlider = props => {
 
     const handlePrevImageClick = () => {
         setDirection('right');
+        restartAutoPlay();
         let prevImage = getPrevImage();
         setCurrentImage(prevImage);
         if (onArrowClick) {
             onArrowClick(prevImage);
         }
     };
+
+    const restartAutoPlay = () => {
+        clearTimeout(autoPlayTimeout);
+        setAutoPlayTimeout(null);
+    };
+
+    if (autoPlay && !autoPlayTimeout) {
+        let timeout = setTimeout(() => {
+            setCurrentImage(getNextImage());
+            restartAutoPlay();
+        }, 3000);
+
+        setAutoPlayTimeout(timeout);
+    }
 
     const classes = props.classes ? props.classes : {};
     const defaultClasses = useStyles(options);
