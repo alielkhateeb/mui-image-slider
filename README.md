@@ -8,6 +8,10 @@
 
 MUI-Image-Slider is an image slider component built on [Material-UI](https://www.material-ui.com).
 
+## Demo
+
+You can access the live demo [here](https://alielkhateeb.github.io/mui-image-slider/demo/)
+
 ## Install
 
 `npm install mui-image-slider --save`
