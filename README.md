@@ -1,6 +1,9 @@
 
 # MUI-Image-Slider - Image Slider for Material UI
 
+[![npm version](https://badge.fury.io/js/mui-image-slider.svg)](https://badge.fury.io/js/mui-image-slider)
+[![Coverage Status](https://coveralls.io/repos/github/alielkhateeb/mui-image-slider/badge.svg?branch=master)](https://coveralls.io/github/alielkhateeb/mui-image-slider?branch=master)
+
 MUI-Image-Slider is an image slider component built on [Material-UI](https://www.material-ui.com).
 
 ## Install
@@ -57,4 +60,4 @@ npm start
 open http://localhost:3001/ in browser
 
 ## License
-The files included in this repository are licensed under the MIT license.
+The files included in this repository are licensed under the ISC license.

@@ -123,6 +123,7 @@ const MuiImageSlider = props => {
 
     if (autoPlay && !autoPlayTimeout) {
         let timeout = setTimeout(() => {
+            setDirection('left');
             setCurrentImage(getNextImage());
             restartAutoPlay();
         }, 3000);
