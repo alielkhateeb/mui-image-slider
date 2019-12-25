@@ -14,8 +14,8 @@ module.exports = {
                 use: {
                     loader: "babel-loader",
                     options: {
-                        presets: ["@babel/preset-env", "@babel/preset-react"]
-                    }
+                        presets: ["@babel/preset-env", "@babel/preset-react"],
+                    },
                 },
                 exclude: /node_modules/,
             },
@@ -27,5 +27,9 @@ module.exports = {
     },
     devServer: {
         port: 3001,
+    },
+    output: {
+        path: path.resolve(__dirname, 'demo'),
+        filename: 'index_bundle.js',
     },
 };

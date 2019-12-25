@@ -5,3 +5,4 @@ example
 webpack.config.js
 rollup.config.js
 .idea
+coverage
