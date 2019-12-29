@@ -20,7 +20,10 @@ describe('MuiImageSlider Component', () => {
         shallow(<MuiImageSlider images={images}/>);
     });
     it('Assert required images prop', () => {
-        expect(MuiImageSlider).to.throw();
+        expect(() => shallow(<MuiImageSlider/>)).to.throw();
+    });
+    it('Refuse empty array images prop', () => {
+        expect(() => shallow(<MuiImageSlider images={[]}/>)).to.throw();
     });
     it('Renders with arrows', () => {
         let wrapper = mount(<MuiImageSlider images={images}/>);
@@ -36,6 +39,22 @@ describe('MuiImageSlider Component', () => {
     });
     it('Prop currentImage starts with 0', () => {
         let wrapper = mount(<MuiImageSlider images={images}/>);
+        expect(wrapper.find(Image).prop('currentImage')).to.equal(0);
+    });
+    it('Get prevImage function', () => {
+        let wrapper = mount(<MuiImageSlider images={images}/>);
+        let prevButton = wrapper.find(ArrowButton).at(0);
+        prevButton.simulate('click');
+        expect(wrapper.find(Image).prop('currentImage')).to.equal(3);
+        prevButton.simulate('click');
+        expect(wrapper.find(Image).prop('currentImage')).to.equal(2);
+    });
+    it('Get nextImage function', () => {
+        let wrapper = mount(<MuiImageSlider images={images.slice(0, 2)}/>);
+        let nextButton = wrapper.find(ArrowButton).at(1);
+        nextButton.simulate('click');
+        expect(wrapper.find(Image).prop('currentImage')).to.equal(1);
+        nextButton.simulate('click');
         expect(wrapper.find(Image).prop('currentImage')).to.equal(0);
     });
 });

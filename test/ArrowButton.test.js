@@ -18,7 +18,9 @@ describe('ArrowButton Component', () => {
     });
     it('Click callback is called', () => {
         let callCount = 0;
-        const testFunction = () => {callCount++};
+        const testFunction = () => {
+            callCount++;
+        };
         let wrapper = shallow(<ArrowButton left onButtonClick={testFunction}/>);
         wrapper.simulate('click');
         expect(callCount).to.equal(1);
@@ -27,5 +29,13 @@ describe('ArrowButton Component', () => {
         const Test = () => <span>Test</span>;
         const wrapper = mount(<ArrowButton left CustomArrow={Test}/>);
         expect(wrapper.text()).to.equal('Test');
+    });
+    it('Prop showArrows', () => {
+        const wrapper = mount(<ArrowButton left showArrows/>);
+        expect(wrapper.prop('showArrows')).to.be.true;
+    });
+    it('Prop alwaysShowArrows', () => {
+        const wrapper = mount(<ArrowButton left alwaysShowArrows/>);
+        expect(wrapper.prop('alwaysShowArrows')).to.be.true;
     });
 });

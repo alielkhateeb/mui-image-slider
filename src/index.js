@@ -22,7 +22,7 @@ const MuiImageSlider = props => {
     const {images, CustomArrow, onArrowClick, autoPlay} = props;
 
     if (!images || !images.length) {
-        throw new Error('images prop is required.');
+        throw new Error('images prop is required and cannot be empty.');
     }
 
     let defaultOptions = {
