@@ -1,7 +1,9 @@
 import React, {useState} from "react";
 import {makeStyles} from "@material-ui/core/styles";
-import Slide from '@material-ui/core/Slide';
+import Image from './Image';
+import ArrowButton from "./ArrowButton";
 
+// noinspection JSCheckFunctionSignatures
 const useStyles = makeStyles({
     root: {
         position: 'relative',
@@ -13,68 +15,15 @@ const useStyles = makeStyles({
         overflow: 'hidden',
         width: '100%',
         height: '100%',
-        '&:hover': {
-            '& $arrowWrapper': {
-                opacity: 1,
-            },
-        },
-    },
-    container: {
-        display: 'flex',
-        transitionProperty: 'transform',
-        height: '100%',
-        alignItems: 'center',
-    },
-    img: {
-        width: '100%',
-    },
-    arrowWrapper: {
-        height: "100%",
-        position: "absolute",
-        top: 0,
-        width: "10%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        zIndex: 100,
-        cursor: 'pointer',
-        transition: 'opacity 300ms, background 300ms',
-        opacity: ({alwaysShowArrows}) => alwaysShowArrows ? 1 : 0,
-        background: ({arrowsBgColor}) => arrowsBgColor,
-        '&:hover': {
-            background: ({arrowsBgHoverColor}) => arrowsBgHoverColor,
-        },
-    },
-    arrowWrapperRight: {
-        right: 0,
-    },
-    arrow: {
-        position: 'relative',
-        display: 'block',
-        height: 50,
-        '&::before': {
-            position: "absolute",
-            display: "block",
-            content: "''",
-            border: "15px solid transparent",
-        },
-    },
-    arrowLeft: {
-        '&::before': {
-            right: -5,
-            borderRightColor: ({arrowsColor}) => arrowsColor,
-        },
-    },
-    arrowRight: {
-        '&::before': {
-            left: -5,
-            borderLeftColor: ({arrowsColor}) => arrowsColor,
-        },
     },
 });
 
 const MuiImageSlider = props => {
-    const {images, customArrow, onArrowClick, autoPlay} = props;
+    const {images, CustomArrow, onArrowClick, autoPlay} = props;
+
+    if (!images || !images.length) {
+        throw new Error('images prop is required.');
+    }
 
     let defaultOptions = {
         arrows: true,
@@ -92,6 +41,7 @@ const MuiImageSlider = props => {
     const [currentImage, setCurrentImage] = useState(0);
     const [direction, setDirection] = useState('left');
     const [autoPlayTimeout, setAutoPlayTimeout] = useState();
+    const [showArrows, setShowArrows] = useState(false);
 
     const getNextImage = () => (currentImage + 1) % images.length;
     const getPrevImage = () => (currentImage ? currentImage : images.length) - 1;
@@ -142,26 +92,24 @@ const MuiImageSlider = props => {
 
     const defaultClasses = useStyles(options);
 
-    const Image = () => <Slide in={true} direction={direction}>
-        <img className={defaultClasses.img} src={images[currentImage]} alt=""/>
-    </Slide>;
-
     return (
-        <div className={`${defaultClasses.root} ${classes.root}`}>
+        <div className={`${defaultClasses.root} ${classes.root}`}
+             onMouseOver={() => setShowArrows(true)}
+             onMouseOut={() => setShowArrows(false)}>
             <div className={`${defaultClasses.wrapper} ${classes.wrapper}`}>
-                <div onClick={handlePrevImageClick}
-                     className={`${defaultClasses.arrowWrapper} ${classes.arrowWrapper}`}>
-                    {customArrow ? customArrow() :
-                        <i className={`${defaultClasses.arrow} ${defaultClasses.arrowLeft}`}/>}
-                </div>
-                <div className={defaultClasses.container}>
-                    <Image/>
-                </div>
-                {arrows &&
-                <div onClick={handleNextImageClick}
-                     className={`${defaultClasses.arrowWrapper} ${classes.arrowWrapper} ${defaultClasses.arrowWrapperRight}`}>
-                    <i className={`${defaultClasses.arrow} ${defaultClasses.arrowRight}`}/>
-                </div>}
+                {arrows && <ArrowButton left
+                                        {...options}
+                                        showArrows={showArrows}
+                                        onButtonClick={handlePrevImageClick}
+                                        classes={{root: classes.arrowWrapper}}
+                                        CustomArrow={CustomArrow}/>}
+                <Image currentImage={currentImage} src={images[currentImage]} direction={direction}/>
+                {arrows && <ArrowButton right
+                                        {...options}
+                                        showArrows={showArrows}
+                                        onButtonClick={handleNextImageClick}
+                                        classes={{root: classes.arrowWrapper}}
+                                        CustomArrow={CustomArrow}/>}
             </div>
         </div>
     );

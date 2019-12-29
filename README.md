@@ -65,5 +65,11 @@ npm start
 ```
 open http://localhost:3001/ in browser
 
+## Testing
+To run the tests locally just run `jest` in the root folder
+```sh
+jest
+```
+
 ## License
 The files included in this repository are licensed under the ISC license.
