@@ -8,6 +8,7 @@ const useStyles = makeStyles({
         transitionProperty: 'transform',
         height: '100%',
         alignItems: 'center',
+        justifyContent: 'center',
     },
     img: {
         width: '100%',
