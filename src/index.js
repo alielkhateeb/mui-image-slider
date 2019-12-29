@@ -41,7 +41,7 @@ const MuiImageSlider = props => {
     const [currentImage, setCurrentImage] = useState(0);
     const [direction, setDirection] = useState('left');
     const [autoPlayTimeout, setAutoPlayTimeout] = useState();
-    const [showArrows, setShowArrows] = useState(false);
+    const [mouseOver, setMouseOver] = useState(false);
 
     const getNextImage = () => (currentImage + 1) % images.length;
     const getPrevImage = () => (currentImage ? currentImage : images.length) - 1;
@@ -86,24 +86,26 @@ const MuiImageSlider = props => {
         ...props.classes || {},
     };
 
+    const showButtons = arrows && images.length > 1;
+
     const defaultClasses = useStyles(options);
 
     return (
         <div className={`${defaultClasses.root} ${classes.root}`}
-             onMouseOver={() => setShowArrows(true)}
-             onMouseOut={() => setShowArrows(false)}>
+             onMouseOver={() => showButtons && setMouseOver(true)}
+             onMouseOut={() => setMouseOver(false)}>
             <div className={`${defaultClasses.wrapper} ${classes.wrapper}`}>
-                {arrows && <ArrowButton left
+                {showButtons && <ArrowButton left
                                         {...options}
-                                        showArrows={showArrows}
+                                        showArrows={mouseOver}
                                         onButtonClick={handlePrevImageClick}
                                         classes={{root: classes.arrowWrapper}}
                                         CustomArrow={CustomArrow}/>}
                 <Image currentImage={currentImage} src={images[currentImage]} direction={direction}
                        classes={{img: classes.img}}/>
-                {arrows && <ArrowButton right
+                {showButtons && <ArrowButton right
                                         {...options}
-                                        showArrows={showArrows}
+                                        showArrows={mouseOver}
                                         onButtonClick={handleNextImageClick}
                                         classes={{root: classes.arrowWrapper}}
                                         CustomArrow={CustomArrow}/>}
