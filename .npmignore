@@ -7,3 +7,7 @@ rollup.config.js
 .idea
 coverage
 test
+.travis-ci
+_config.yml
+jest.config.json
+jest.setup.js
