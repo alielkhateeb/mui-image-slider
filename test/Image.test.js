@@ -11,7 +11,7 @@ describe('Image Component', () => {
         shallow(<Image src="Some URL"/>);
     });
     it('Assert src prop is required', () => {
-        expect(Image).to.throw();
+        expect(() => shallow(<Image/>)).to.throw();
     });
     it('Prop currentImage starts with 0', () => {
         let wrapper = mount(<Image src="Some URL" currentImage={0}/>);
