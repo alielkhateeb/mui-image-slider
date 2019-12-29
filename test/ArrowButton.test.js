@@ -14,7 +14,7 @@ describe('ArrowButton Component', () => {
         shallow(<ArrowButton right/>);
     });
     it('Assert right/left prop is required', () => {
-        expect(ArrowButton).to.throw();
+        expect(() => shallow(ArrowButton)).to.throw();
     });
     it('Click callback is called', () => {
         let callCount = 0;
