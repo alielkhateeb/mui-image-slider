@@ -53,6 +53,7 @@ const images = [
 |**`root`**|Styles applied to the `root` element.
 |**`wrapper`**|Styles applied to the `wrapper` element.
 |**`arrowWrapper`**|Styles applied to the `arrowWrapper` element.
+|**`img`**|Styles applied to each `img` element.
 
 ## Contributing
 Thanks for taking an interest in the library and the github community!

@@ -40,7 +40,10 @@ const useStyles = makeStyles({
 function ArrowButton(props) {
     const {onButtonClick, classes, right, left, CustomArrow} = props;
 
-    const customClasses = classes ? classes : {};
+    const customClasses = {
+        root: '',
+        ...classes || {},
+    };
 
     if (!CustomArrow && !right && !left) {
         throw new Error('One of `right` or `left` props must be true');

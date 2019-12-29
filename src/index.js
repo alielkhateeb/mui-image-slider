@@ -81,14 +81,10 @@ const MuiImageSlider = props => {
         setAutoPlayTimeout(timeout);
     }
 
-    /**
-     * Default classes
-     * @type {{root: string, wrapper: string, arrowWrapper: string}}
-     */
-    let classes = {root: '', wrapper: '', arrowWrapper: ''};
-    if (props.classes) {
-        classes = {...classes, ...props.classes};
-    }
+    let classes = {
+        root: '', wrapper: '', arrowWrapper: '', img: '',
+        ...props.classes || {},
+    };
 
     const defaultClasses = useStyles(options);
 
@@ -103,7 +99,8 @@ const MuiImageSlider = props => {
                                         onButtonClick={handlePrevImageClick}
                                         classes={{root: classes.arrowWrapper}}
                                         CustomArrow={CustomArrow}/>}
-                <Image currentImage={currentImage} src={images[currentImage]} direction={direction}/>
+                <Image currentImage={currentImage} src={images[currentImage]} direction={direction}
+                       classes={{img: classes.img}}/>
                 {arrows && <ArrowButton right
                                         {...options}
                                         showArrows={showArrows}
