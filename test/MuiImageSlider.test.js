@@ -41,21 +41,51 @@ describe('MuiImageSlider Component', () => {
         let wrapper = mount(<MuiImageSlider images={images}/>);
         expect(wrapper.find(Image).prop('currentImage')).to.equal(0);
     });
-    it('Get prevImage function', () => {
+    describe('Get prevImage function', () => {
         let wrapper = mount(<MuiImageSlider images={images}/>);
         let prevButton = wrapper.find(ArrowButton).at(0);
-        prevButton.simulate('click');
-        expect(wrapper.find(Image).prop('currentImage')).to.equal(3);
-        prevButton.simulate('click');
-        expect(wrapper.find(Image).prop('currentImage')).to.equal(2);
+        it('Infinite loop for previous image button', () => {
+            prevButton.simulate('click');
+            expect(wrapper.find(Image).prop('currentImage')).to.equal(3);
+        });
+        it('Previous Image in list', () => {
+            prevButton.simulate('click');
+            expect(wrapper.find(Image).prop('currentImage')).to.equal(2);
+        });
     });
-    it('Get nextImage function', () => {
+    describe('Get nextImage function', () => {
         let wrapper = mount(<MuiImageSlider images={images.slice(0, 2)}/>);
         let nextButton = wrapper.find(ArrowButton).at(1);
-        nextButton.simulate('click');
-        expect(wrapper.find(Image).prop('currentImage')).to.equal(1);
-        nextButton.simulate('click');
-        expect(wrapper.find(Image).prop('currentImage')).to.equal(0);
+        it('Next Image in list', () => {
+            nextButton.simulate('click');
+            expect(wrapper.find(Image).prop('currentImage')).to.equal(1);
+        });
+        it('Infinite loop for next image button', () => {
+            nextButton.simulate('click');
+            expect(wrapper.find(Image).prop('currentImage')).to.equal(0);
+        });
+    });
+    describe('onArrowClick Previous/Next Button', () => {
+        let callCount = 0;
+        let callbackCurrentImage = null;
+        const testFunction = (currentImage) => {
+            callCount++;
+            callbackCurrentImage = currentImage;
+        };
+        let wrapper = mount(<MuiImageSlider images={images} onArrowClick={testFunction}/>);
+
+        it('onArrowClick Next Button', () => {
+            let nextButton = wrapper.find(ArrowButton).at(1);
+            nextButton.simulate('click');
+            expect(callCount).to.equal(1);
+            expect(callbackCurrentImage).to.equal(1);
+        });
+        it('onArrowClick Previous Button', () => {
+            let prevButton = wrapper.find(ArrowButton).at(0);
+            prevButton.simulate('click');
+            expect(callCount).to.equal(2);
+            expect(callbackCurrentImage).to.equal(0);
+        });
     });
 });
 
