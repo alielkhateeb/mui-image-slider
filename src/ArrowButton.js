@@ -2,7 +2,7 @@ import React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 
 const useStyles = makeStyles({
-    arrowWrapper: {
+    root: {
         height: "100%",
         position: "absolute",
         top: 0,
@@ -38,20 +38,15 @@ const useStyles = makeStyles({
 });
 
 function ArrowButton(props) {
-    const {onButtonClick, classes, right, left, CustomArrow} = props;
-
-    const customClasses = {
-        root: '',
-        ...classes || {},
-    };
+    const {onButtonClick, right, left, CustomArrow} = props;
 
     if (!CustomArrow && !right && !left) {
         throw new Error('One of `right` or `left` props must be true');
     }
 
-    const styles = useStyles(props);
-    return <div onClick={onButtonClick} className={`${styles.arrowWrapper} ${customClasses.root}`}>
-        {CustomArrow ? CustomArrow() : <i className={`${styles.arrow}`}/>}
+    const classes = useStyles(props);
+    return <div onClick={onButtonClick} className={classes.root}>
+        {CustomArrow ? CustomArrow() : <i className={`${classes.arrow}`}/>}
     </div>;
 }
 

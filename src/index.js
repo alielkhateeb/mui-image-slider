@@ -16,6 +16,8 @@ const useStyles = makeStyles({
         width: '100%',
         height: '100%',
     },
+    arrowWrapper: {},
+    img: {},
 });
 
 const MuiImageSlider = props => {
@@ -81,20 +83,14 @@ const MuiImageSlider = props => {
         setAutoPlayTimeout(timeout);
     }
 
-    let classes = {
-        root: '', wrapper: '', arrowWrapper: '', img: '',
-        ...props.classes || {},
-    };
-
     const showButtons = arrows && images.length > 1;
 
-    const defaultClasses = useStyles(options);
-
+    const classes = useStyles(options);
     return (
-        <div className={`${defaultClasses.root} ${classes.root}`}
+        <div className={classes.root}
              onMouseOver={() => showButtons && setMouseOver(true)}
              onMouseOut={() => setMouseOver(false)}>
-            <div className={`${defaultClasses.wrapper} ${classes.wrapper}`}>
+            <div className={classes.wrapper}>
                 {showButtons && <ArrowButton left
                                         {...options}
                                         showArrows={mouseOver}

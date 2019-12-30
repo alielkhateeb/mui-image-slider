@@ -15,21 +15,16 @@ const useStyles = makeStyles({
     },
 });
 
-const Image = ({src, direction, currentImage, classes}) => {
-    const styles = useStyles();
-
-    let customClasses = {
-        img: '',
-        ...classes || {}
-    };
-
+const Image = (props) => {
+    const {src, direction, currentImage} = props;
     if (!src) {
         throw new Error('Image src is required.');
     }
 
-    return <div key={currentImage} className={styles.root}>
+    const classes = useStyles(props);
+    return <div key={currentImage} className={classes.root}>
         <Slide in={true} direction={direction}>
-            <img className={`${styles.img} ${customClasses.img}`} src={src} alt=""/>
+            <img className={classes.img} src={src} alt=""/>
         </Slide>
     </div>;
 };
