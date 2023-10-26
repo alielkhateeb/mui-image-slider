@@ -1,5 +1,5 @@
 {
   "testRegex": "((\\.|/*.)(test))\\.js?$",
-  "setupFilesAfterEnv": ["<rootDir>/jest.setup.js"],
-  "testEnvironment": "jsdom"
+  "testEnvironment": "jsdom",
+  "transformIgnorePatterns": ["<rootDir>/node_modules/"]
 }

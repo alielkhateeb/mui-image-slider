@@ -1,5 +1,5 @@
 import React from "react";
-import makeStyles from "@material-ui/core/styles/makeStyles";
+import makeStyles from "@mui/material/styles/makeStyles";
 
 const useStyles = makeStyles({
   root: {
@@ -38,6 +38,9 @@ const useStyles = makeStyles({
   },
 });
 
+export const ARROW_RIGHT_TEST_ID = "arrow-right";
+export const ARROW_LEFT_TEST_ID = "arrow-left";
+
 function ArrowButton(props) {
   const { onButtonClick, right, left, CustomArrow } = props;
 
@@ -47,7 +50,11 @@ function ArrowButton(props) {
 
   const classes = useStyles(props);
   return (
-    <div onClick={onButtonClick} className={classes.root}>
+    <div
+      data-testid={right ? ARROW_RIGHT_TEST_ID : ARROW_LEFT_TEST_ID}
+      onClick={onButtonClick}
+      className={classes.root}
+    >
       {CustomArrow ? CustomArrow() : <i className={`${classes.arrow}`} />}
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/material/styles";
 import Image from "./Image";
 import ArrowButton from "./ArrowButton";
 

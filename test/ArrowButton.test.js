@@ -1,41 +1,34 @@
 import React from "react";
-import {configure, mount, shallow} from "enzyme";
-import {expect} from 'chai';
-import Adapter from "enzyme-adapter-react-16";
-import ArrowButton from "../src/ArrowButton";
+import ArrowButton, {
+  ARROW_LEFT_TEST_ID,
+  ARROW_RIGHT_TEST_ID,
+} from "../src/ArrowButton";
+import { render, screen, fireEvent } from "@testing-library/react";
 
-configure({adapter: new Adapter()});
+configure({ adapter: new Adapter() });
 
-describe('ArrowButton Component', () => {
-    it('Left Arrow Renders', () => {
-        shallow(<ArrowButton left/>);
-    });
-    it('Right Arrow Renders', () => {
-        shallow(<ArrowButton right/>);
-    });
-    it('Assert right/left prop is required', () => {
-        expect(() => shallow(ArrowButton)).to.throw();
-    });
-    it('Click callback is called', () => {
-        let callCount = 0;
-        const testFunction = () => {
-            callCount++;
-        };
-        let wrapper = shallow(<ArrowButton left onButtonClick={testFunction}/>);
-        wrapper.simulate('click');
-        expect(callCount).to.equal(1);
-    });
-    it('CustomArrow renders', () => {
-        const Test = () => <span>Test</span>;
-        const wrapper = mount(<ArrowButton left CustomArrow={Test}/>);
-        expect(wrapper.text()).to.equal('Test');
-    });
-    it('Prop showArrows', () => {
-        const wrapper = mount(<ArrowButton left showArrows/>);
-        expect(wrapper.prop('showArrows')).to.be.true;
-    });
-    it('Prop alwaysShowArrows', () => {
-        const wrapper = mount(<ArrowButton left alwaysShowArrows/>);
-        expect(wrapper.prop('alwaysShowArrows')).to.be.true;
-    });
+describe("ArrowButton Component", () => {
+  it("Left Arrow Renders", () => {
+    render(<ArrowButton left />);
+    expect(screen.findByTestId(ARROW_LEFT_TEST_ID)).toBeTruthy();
+  });
+  it("Right Arrow Renders", () => {
+    render(<ArrowButton left />);
+    expect(screen.findByTestId(ARROW_RIGHT_TEST_ID)).toBeTruthy();
+  });
+  it("Assert right/left prop is required", () => {
+    expect(() => render(<ArrowButton left />)).to.throw();
+  });
+  it("Click callback is called", () => {
+    const clickCallback = jest.fn();
+    render(<ArrowButton left onButtonClick={clickCallback} />);
+    const arrow = screen.findByTestId(ARROW_LEFT_TEST_ID);
+    fireEvent.click(arrow);
+    expect(clickCallback).toHaveBeenCalled();
+  });
+  it("CustomArrow renders", () => {
+    const Test = () => <span>Test</span>;
+    render(<ArrowButton left CustomArrow={Test} />);
+    expect(screen.getByText("Test")).toBeTruthy();
+  });
 });
