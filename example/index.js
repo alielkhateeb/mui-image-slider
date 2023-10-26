@@ -1,16 +1,18 @@
-import React from 'react';
-import {render} from 'react-dom';
-import MuiImageSlider from '../src';
+import React from "react";
+import { render } from "react-dom";
+import MuiImageSlider from "../src";
 
 const App = () => {
-    const images = [
-        'https://homepages.cae.wisc.edu/~ece533/images/airplane.png',
-        'https://homepages.cae.wisc.edu/~ece533/images/arctichare.png',
-        'https://homepages.cae.wisc.edu/~ece533/images/baboon.png',
-        'https://homepages.cae.wisc.edu/~ece533/images/barbara.png',
-    ];
-
-    return <MuiImageSlider images={images} autoPlay/>;
-
+  return (
+    <MuiImageSlider
+      images={[
+        "https://picsum.photos/id/0/5000/3333",
+        "https://picsum.photos/id/1/5000/3333",
+        "https://picsum.photos/id/2/5000/3333",
+        "https://picsum.photos/id/3/5000/3333",
+      ]}
+      autoPlay
+    />
+  );
 };
-render(<App/>, document.getElementById("root"));
+render(<App />, document.getElementById("root"));
