@@ -1,6 +1,6 @@
 import React from "react";
 import Slide from "@mui/material/Slide";
-import makeStyles from "@mui/material/styles/makeStyles";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
   root: {
